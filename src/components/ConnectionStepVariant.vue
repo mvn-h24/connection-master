@@ -86,7 +86,7 @@ export default defineComponent({
   },
   methods: {
     variantSelected(): void {
-      this.$emit("selected");
+      this.$emit("selected", this.resPrice);
     },
     optionToggled(
       index: number,

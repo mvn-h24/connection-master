@@ -7,10 +7,11 @@
       :opened="currentStep === index"
       :title="step.title"
       :variants="step.variants"
+      @variantSelected="variantSelectedHandler"
     />
     <p class="summary" v-if="summaryPrice !== undefined">
-      <span>Итого</span>
-      <span>{{ summaryPrice }}</span>
+      <span class="title">Итого к оплате</span>
+      <span class="price">{{ summaryPrice }}</span>
     </p>
   </div>
 </template>
@@ -39,6 +40,14 @@ export default defineComponent({
       default: () => [],
     },
   },
+  methods: {
+    variantSelectedHandler(resPrice: number) {
+      this.summaryPrice = this.summaryPrice
+        ? this.summaryPrice + resPrice
+        : resPrice;
+      this.currentStep++;
+    },
+  },
 });
 </script>
 <style scoped>
@@ -48,5 +57,25 @@ h1 {
 .master {
   max-width: 778px;
   padding: 13px;
+}
+.summary {
+  display: flex;
+  justify-content: space-between;
+  font-size: 25px;
+  padding: 20px;
+  background-color: #61cc5b;
+  border-radius: 10px;
+  color: #ffffff;
+}
+.summary .title {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.summary .price {
+  font-weight: lighter;
+}
+.summary .price:after {
+  content: "\20BD";
+  padding: 0 0 0 5px;
 }
 </style>

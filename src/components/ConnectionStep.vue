@@ -12,7 +12,7 @@
         :select="variant.select"
         :selected="selectedVariant === index"
         :key="index"
-        @selected="variantSelected(index)"
+        @selected="variantSelected(index, $event)"
       />
     </div>
   </article>
@@ -46,24 +46,28 @@ export default defineComponent({
     },
   },
   methods: {
-    variantSelected(variantIndex: number) {
+    variantSelected(variantIndex: number, resPrice: number) {
       if (this.selectedVariant === variantIndex) {
         this.selectedVariant = undefined;
       } else {
         this.selectedVariant = variantIndex;
       }
+      this.$emit("variantSelected", resPrice);
     },
   },
 });
 </script>
 
 <style scoped>
+article.closed h2 {
+  color: #cccccc;
+}
 article {
   padding: 15px 0;
   border-top: 2px solid #dddddd;
 }
 h2 {
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 .variants-list > :deep(div:not(:first-child)) {
   margin-top: 15px;
