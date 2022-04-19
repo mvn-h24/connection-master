@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "vue": "^3.2.13",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "vuex-module-decorators": "^2.0.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

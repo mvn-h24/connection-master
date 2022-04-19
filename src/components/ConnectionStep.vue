@@ -9,20 +9,27 @@
         :color="variant.color"
         :price_default="variant.price_default"
         :options="variant.options"
-        :select="variant.select"
+        :selected="selectedVariant === index"
         :key="index"
+        @selected="variantSelected(index)"
       />
     </div>
   </article>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, Ref, ref } from "vue";
 import { ConnectionStepVariant as IConnectionStepVariant } from "@/types/connection-step-variant";
 import ConnectionStepVariant from "@/components/ConnectionStepVariant.vue";
 
 export default defineComponent({
   components: { ConnectionStepVariant },
+  setup() {
+    const selectedVariant: Ref<undefined | number> = ref(undefined);
+    return {
+      selectedVariant,
+    };
+  },
   props: {
     opened: {
       type: Boolean,
@@ -35,6 +42,15 @@ export default defineComponent({
     variants: {
       type: Array as PropType<Array<IConnectionStepVariant>>,
       required: true,
+    },
+  },
+  methods: {
+    variantSelected(variantIndex: number) {
+      if (this.selectedVariant === variantIndex) {
+        this.selectedVariant = undefined;
+      } else {
+        this.selectedVariant = variantIndex;
+      }
     },
   },
 });

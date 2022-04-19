@@ -6,5 +6,5 @@ export interface ConnectionStepVariant {
   color: string;
   price_default: number;
   options: Array<ConnectionStepVariantOption>;
-  select: Array<ConnectionStepVariantOption>;
+  // select: Array<ConnectionStepVariantOption>;
 }

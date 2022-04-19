@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import ConnectionMaster from "@/components/ConnectionMaster.vue";
 import { useConnectionMasterSteps } from "@/composable/useConnectionMasterSteps";
+import ConnectionMaster from "@/components/ConnectionMaster.vue";
 
 const steps = useConnectionMasterSteps();
 </script>

@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
+    "experimentalDecorators": true,
     "importHelpers": true,
     "moduleResolution": "node",
     "skipLibCheck": true,

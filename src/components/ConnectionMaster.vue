@@ -19,9 +19,13 @@
 import { defineComponent, PropType, Ref, ref } from "vue";
 import { ConnectionStep as IConnectionStep } from "@/types/connection-step";
 import ConnectionStep from "@/components/ConnectionStep.vue";
+import { getModule } from "vuex-module-decorators";
+import { ConnectionMasterStore } from "@/store/connection-master.store";
 
 export default defineComponent({
   setup() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const store = getModule(ConnectionMasterStore);
     const summaryPrice: Ref<number | undefined> = ref(undefined);
     const currentStep: Ref<number> = ref(0);
     return { summaryPrice, currentStep };
