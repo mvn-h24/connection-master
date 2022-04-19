@@ -9,6 +9,7 @@
         :color="variant.color"
         :price_default="variant.price_default"
         :options="variant.options"
+        :select="variant.select"
         :selected="selectedVariant === index"
         :key="index"
         @selected="variantSelected(index)"
@@ -64,7 +65,7 @@ article {
 h2 {
   padding-bottom: 15px;
 }
-.variants-list :deep(div:not(:first-child)) {
+.variants-list > :deep(div:not(:first-child)) {
   margin-top: 15px;
 }
 </style>

@@ -17,6 +17,18 @@
             @toggled="optionToggled(index, $event)"
           />
         </div>
+        <div class="variant__info__config__selects-list" v-if="select.length">
+          <template v-for="(selectList, index) in select">
+            <ConnectionStepVariantSelect
+              v-if="selectList.items.length"
+              :items="selectList.items"
+              :readonly="selected"
+              :title="selectList.title"
+              :key="index"
+              @selectSelected="selectSelectedHandler(index, $event)"
+            />
+          </template>
+        </div>
         <SkyButton :activated="selected" @click="variantSelected">{{
           selected ? "Выбрано" : "Выбрать"
         }}</SkyButton>
@@ -27,12 +39,18 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
-import ConnectionStepVariantOption from "@/components/ConnectionStepVariantOption.vue";
 import { ConnectionStepVariantOption as IConnectionStepVariantOption } from "@/types/connection-step-variant-option";
+import ConnectionStepVariantOption from "@/components/ConnectionStepVariantOption.vue";
+import { ConnectionStepVariantSelect as IConnectionStepVariantSelect } from "@/types/connection-step-variant-select";
+import ConnectionStepVariantSelect from "@/components/ConnectionStepVariantSelect.vue";
 import SkyButton from "@/components/SkyButton.vue";
 
 export default defineComponent({
-  components: { SkyButton, ConnectionStepVariantOption },
+  components: {
+    ConnectionStepVariantSelect,
+    SkyButton,
+    ConnectionStepVariantOption,
+  },
   setup(props) {
     const resPrice = ref(props.price_default);
     return { resPrice };
@@ -57,7 +75,7 @@ export default defineComponent({
       default: () => [],
     },
     select: {
-      type: Array,
+      type: Array as PropType<Array<IConnectionStepVariantSelect>>,
       default: () => [],
     },
   },
@@ -83,6 +101,18 @@ export default defineComponent({
         this.resPrice -= dto.optionPrice;
       }
     },
+    selectSelectedHandler(
+      selectIndex: number,
+      dto: {
+        currentOption: undefined | number;
+        currentPrice: number;
+        prevOption: undefined | number;
+        prevPrice: number;
+      }
+    ): void {
+      this.resPrice -= dto.prevPrice;
+      this.resPrice += dto.currentPrice;
+    },
   },
 });
 </script>
@@ -96,6 +126,7 @@ export default defineComponent({
 }
 .variant__title,
 .variant__info {
+  margin-top: 10px;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -116,7 +147,8 @@ export default defineComponent({
 .variant__info__config {
   width: 30%;
 }
-.variant__info__config__options-list {
+.variant__info__config__options-list,
+.variant__info__config__selects-list {
   width: 100%;
   margin-bottom: 10px;
 }
