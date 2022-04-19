@@ -25,4 +25,11 @@ body,
   margin: 0;
   box-sizing: border-box;
 }
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 </style>
