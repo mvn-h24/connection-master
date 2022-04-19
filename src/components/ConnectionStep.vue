@@ -1,7 +1,7 @@
 <template>
   <article :class="{ closed: !opened }">
     <h2>{{ title }}</h2>
-    <div v-show="opened">
+    <div class="variants-list" v-show="opened">
       <ConnectionStepVariant
         v-for="(variant, index) in variants"
         :title="variant.title"
@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { ConnectionStepVariant as ConnectionStepVariantType } from "@/types/connection-step-variant";
+import { ConnectionStepVariant as IConnectionStepVariant } from "@/types/connection-step-variant";
 import ConnectionStepVariant from "@/components/ConnectionStepVariant.vue";
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
       required: true,
     },
     variants: {
-      type: Array as PropType<Array<ConnectionStepVariantType>>,
+      type: Array as PropType<Array<IConnectionStepVariant>>,
       required: true,
     },
   },
@@ -42,5 +42,13 @@ export default defineComponent({
 
 <style scoped>
 article {
+  padding: 15px 0;
+  border-top: 2px solid #dddddd;
+}
+h2 {
+  padding-bottom: 15px;
+}
+.variants-list :deep(div:not(:first-child)) {
+  margin-top: 15px;
 }
 </style>

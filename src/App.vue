@@ -18,5 +18,11 @@ body,
   margin: 0;
   min-height: 100vh;
   width: 100%;
+  font-family: Arial, sans-serif;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 </style>

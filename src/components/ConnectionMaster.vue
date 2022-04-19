@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="master">
     <h1>Заявка на подключение к интернету</h1>
     <ConnectionStep
       v-for="(step, index) in steps"
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, Ref, ref } from "vue";
-import { ConnectionStep as ConnectionStepType } from "@/types/connection-step";
+import { ConnectionStep as IConnectionStep } from "@/types/connection-step";
 import ConnectionStep from "@/components/ConnectionStep.vue";
 
 export default defineComponent({
@@ -31,9 +31,18 @@ export default defineComponent({
   },
   props: {
     steps: {
-      type: Array as PropType<Array<ConnectionStepType>>,
+      type: Array as PropType<Array<IConnectionStep>>,
       default: () => [],
     },
   },
 });
 </script>
+<style scoped>
+h1 {
+  margin-bottom: 20px;
+}
+.master {
+  max-width: 778px;
+  padding: 13px;
+}
+</style>
